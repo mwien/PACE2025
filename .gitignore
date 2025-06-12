@@ -1,0 +1,4 @@
+target/
+native/maxpre/**/lib/
+native/maxpre/**/*.o
+native/maxpre/**/*.d

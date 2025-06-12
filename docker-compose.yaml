@@ -1,0 +1,34 @@
+services:
+  ds-exact:
+    build:
+      context: .
+      dockerfile: docker-eval/pace-eval-ds-exact/Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "16GB"
+    environment:
+      MAX_TIME: 1800 #in seconds
+      MERCY_TIME: 30 #in seconds
+      SOLVER_CMD: "/solver/target/release/uzl_ds"
+    volumes:
+      - "./docker-eval/output/ds/exact:/output"
+      - "./docker-eval/instances/ds/exact:/instances"
+
+  hs-exact:
+    build:
+      context: .
+      dockerfile: docker-eval/pace-eval-hs-exact/Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "16GB"
+    environment:
+      MAX_TIME: 1800 #in seconds
+      MERCY_TIME: 25 #in seconds
+      SOLVER_CMD: "/solver/target/release/uzl_hs"
+    volumes:
+      - "./docker-eval/output/hs/exact:/output"
+      - "./docker-eval/instances/hs/exact:/instances"

@@ -1,0 +1,14 @@
+[package]
+name = "solver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.31", features = ["derive", "cargo"] }
+gag = "1.0.0"
+kissat = "0.1.0"
+
+[build-dependencies]
+bindgen = "0.71.1"
+cmake = "0.1"
+cc = "1.0"
