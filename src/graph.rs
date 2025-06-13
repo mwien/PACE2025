@@ -1,5 +1,4 @@
-use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::BufRead;
 
 pub struct Graph {
     pub n: usize,
@@ -7,11 +6,9 @@ pub struct Graph {
 }
 
 impl Graph {
-    pub fn new_from_file(file_name: &str) -> Graph {
-        let file = File::open(file_name).unwrap();
-        let reader = BufReader::new(file);
+    pub fn new_from_stdin() -> Graph {
         let mut adj_list = Vec::new();
-        for line in reader.lines() {
+        for line in std::io::stdin().lock().lines() {
             let line = line.unwrap();
             let line = line.trim();
             let tokens: Vec<&str> = line.split(' ').collect();

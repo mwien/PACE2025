@@ -1,7 +1,5 @@
 use crate::Graph;
-use std::fs::File;
-use std::io::{BufRead, BufReader};
-use std::mem::swap;
+use std::{io::BufRead, mem::swap};
 
 #[derive(Debug, Clone)]
 pub struct Hypergraph {
@@ -17,12 +15,10 @@ impl Hypergraph {
         }
     }
 
-    pub fn new_from_file(file_name: &str) -> Hypergraph {
-        let file = File::open(file_name).unwrap();
-        let reader = BufReader::new(file);
+    pub fn new_from_stdin() -> Hypergraph {
         let mut n = 0;
         let mut sets = Vec::new();
-        for line in reader.lines() {
+        for line in std::io::stdin().lock().lines() {
             let line = line.unwrap();
             let line = line.trim();
             let tokens: Vec<&str> = line.split(' ').collect();

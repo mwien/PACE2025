@@ -14,10 +14,10 @@ struct Settings {
     prune: bool,
 }
 
-pub fn solve(task: Task, file_name: &str) {
+pub fn solve(task: Task) {
     let mut h = match task {
-        Task::DominatingSet => Hypergraph::new_from_graph(Graph::new_from_file(file_name)),
-        Task::HittingSet => Hypergraph::new_from_file(file_name),
+        Task::DominatingSet => Hypergraph::new_from_graph(Graph::new_from_stdin()),
+        Task::HittingSet => Hypergraph::new_from_stdin(),
     };
 
     let settings = match task {

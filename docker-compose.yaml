@@ -27,7 +27,7 @@ services:
           memory: "16GB"
     environment:
       MAX_TIME: 1800 #in seconds
-      MERCY_TIME: 25 #in seconds
+      MERCY_TIME: 30 #in seconds
       SOLVER_CMD: "/solver/target/release/uzl_hs"
     volumes:
       - "./docker-eval/output/hs/exact:/output"

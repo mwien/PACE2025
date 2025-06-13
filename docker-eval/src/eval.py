@@ -26,16 +26,28 @@ with open(RESULTS_FILE, "w") as result_file:
         output_path = os.path.join(CACHE_DIR, f"{instance_file}.sol")
 
         try:
+            with open(instance_path, "r") as infile:
+                instance =infile.read()
+
             start = time.time()
             proc = subprocess.Popen(
-                ["taskset", "-c", "0"] + SOLVER_CMD + [instance_path],
+                ["taskset", "-c", "0"] + SOLVER_CMD,
+                stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True
             )
 
+            #proc = subprocess.Popen(
+            #    ["taskset", "-c", "0"] + SOLVER_CMD + [instance_path],
+            #    stdout=subprocess.PIPE,
+            #    stderr=subprocess.PIPE,
+            #    text=True
+            #)
+
             try:
-                stdout, stderr = proc.communicate(timeout=MAX_TIME)
+                #stdout, stderr = proc.communicate(timeout=MAX_TIME)
+                stdout, stderr = proc.communicate(timeout=MAX_TIME, input=instance)
                 end = time.time()
                 runtime = end - start
             except subprocess.TimeoutExpired:
